@@ -1,0 +1,19 @@
+<h1> Meals Index</h1>
+<% if user_signed_in? %>
+<p> My Meals -- meals that current_user is host of</p>
+<br>
+<p> Friend's Meals -- meals that current_user is guest of & invite='attending'</p>
+<br>
+<p> My invites -- meals that current user is guest & invite='pending'</p>
+<% @meals.each do |meal| %>
+  <%= meal.title %>
+  <% meal.users.each do |user| %>
+    <%= user.email %>
+  <% end %>
+  <br>
+
+<% end %>
+
+<% else %>
+<p> you should sign up now </p>
+<% end %>

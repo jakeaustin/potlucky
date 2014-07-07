@@ -1,0 +1,33 @@
+<h1>Form for new meals </h1>
+<%= form_for (@meal) do |f| %>
+
+  <% if @meal.errors.any? %>
+  <div class="bg-danger">
+    This form has <%=pluralize(@meal.errors.count, "error") %>.
+  </div>
+  <ul>
+    <% @meal.errors.full_messages.each do |msg| %>
+    <li>* <%= msg %> </li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <br><br>
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label :hosted_at, "When?" %>
+    <%= f.datetime_select :hosted_at, :ampm => true, :minute_step => 15 %>
+  </div>
+
+  <div class="actions">
+  <%= f.submit "Create Meal!", class: "btn btn-large btn-primary" %>
+</div>
+<% end %>
