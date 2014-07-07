@@ -1,5 +1,5 @@
-<h1> Meals Index</h1>
 <% if user_signed_in? %>
+<h1> Meals Index</h1>
 <p> My Meals -- meals that current_user is host of</p>
 <br>
 <p> Friend's Meals -- meals that current_user is guest of & invite='attending'</p>
@@ -13,7 +13,6 @@
   <br>
 
 <% end %>
-
 <% else %>
-<p> you should sign up now </p>
+<p> you should make an account </p>
 <% end %>

@@ -1,7 +1,7 @@
 class MealsController < ApplicationController
 
   def index
-    @meals = current_user.meals
+      @meals = current_user.meals if user_signed_in?
   end
 
   def new
