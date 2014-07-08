@@ -1,10 +1,11 @@
 <% if user_signed_in? %>
 <h1> Meals Index</h1>
+<%= link_to 'New meal', new_meal_path %>
 <p> My Meals -- meals that current_user is host of</p>
 <br>
 <p> Friend's Meals -- meals that current_user is guest of & invite='attending'</p>
 <br>
-<p> My invites -- meals that current user is guest & invite='pending'</p>
+<p> My Invites -- meals that current user is guest & invite='pending'</p>
 <% @meals.each do |meal| %>
   <%= meal.title %>
   <% meal.users.each do |user| %>
@@ -14,5 +15,7 @@
 
 <% end %>
 <% else %>
-<p> you should make an account </p>
+<p> Plan meals, pick dishes, invite your friends! </p>
+<br><h3>Get Started!</h3>
+<%= button_to 'Get Started!', new_user_registration_path, method: 'get', class: "btn btn-primary" %>
 <% end %>
