@@ -1,3 +1,19 @@
 <p><%= @meal.host.email %></p>
 <h2><%= @meal.title %></h2>
 <p><%= @meal.location %> at <%= @meal.hosted_at %></p>
+
+<% if @meal.host == current_user %>
+<p> Invite Guests </p>
+<%= form_tag(meal_users_path(@meal), :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<p> Delete this meal link </p>
+<%= button_to 'Delete Meal', meal_path(@meal), method: :delete, class: 'btn btn-warning' %>
+
+<% else %>
+<div>
+<h4>RSVP</h4>
+</div>
+<% end %>

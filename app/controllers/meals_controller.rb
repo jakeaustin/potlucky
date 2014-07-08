@@ -27,9 +27,16 @@ class MealsController < ApplicationController
     if user_signed_in?
       @meal = Meal.find(params[:id])
       redirect_to root_path unless @meal.guest_users.include?(current_user)
+    else
+      redirect_to root_path
     end
   end
 
+  def destroy
+    @meal = Meal.find(params[:id])
+    @meal.destroy
+    redirect_to root_path, alert: "Song deleted"
+  end
 
   private
 

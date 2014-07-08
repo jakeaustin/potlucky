@@ -1,0 +1,12 @@
+<% @users.each do |user| %>
+<% if Meal.find(params[:meal_id]).guest_users.include?(user) %>
+<%= user.user_meals.where(meal_id: params[:meal_id]).first.invite_status %>  |  <%= user.email %>
+<% else %>
+<div class="block">
+<%= button_to 'Invite', meal_usermeals_path(user_id: user, role: 'guest', invite_status: 'pending'), method: :post, class: 'btn btn-primary' %>
+</div>
+|  <%= user.email %>
+
+<% end %>
+<br>
+<% end %>
