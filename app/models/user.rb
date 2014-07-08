@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   has_many :guest_meals, through: :guest_user_meals, source: :user, source: :meal
   has_many :invited_user_meals, -> { where role: 'guest', invite_status: 'pending' }, class_name: UserMeal
   has_many :invited_meals, through: :invited_user_meals, source: :user, source: :meal
+  has_many :declined_user_meals, -> { where role: 'guest', invite_status: 'decline' }, class_name: UserMeal
+  has_many :declined_meals, through: :declined_user_meals, source: :user, source: :meal
+
+
 
   def self.search(query)
     where("email like ?", "%#{query}%")

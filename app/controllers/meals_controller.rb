@@ -5,6 +5,7 @@ class MealsController < ApplicationController
       @my_meals = current_user.hosted_meals.order(hosted_at: :asc)
       @friends_meals = current_user.guest_meals(hosted_at: :asc)
       @invites = current_user.invited_meals(hosted_at: :asc)
+      @declined = current_user.declined_meals(hosted_at: :asc)
     end
   end
 

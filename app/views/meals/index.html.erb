@@ -1,33 +1,45 @@
 <% if user_signed_in? %>
-<h1> Meals Index</h1>
-<%= link_to 'New meal', new_meal_path %>
-<p> My Meals </p>
-<% @my_meals.each do |meal| %>
-  <%= link_to meal.title, meal_path(meal) %>
-  Hosted by <%= meal.host.email %>
-  at <%= meal.hosted_at %>
+  <h1> Meals Index</h1>
+  <%= link_to 'New meal', new_meal_path %>
+
+  <p> My Meals </p>
+  <% @my_meals.each do |meal| %>
+    <%= link_to meal.title, meal_path(meal) %>
+    Hosted by <%= meal.host.email %>
+    at <%= meal.hosted_at %>
+    <br>
+  <% end %>
   <br>
-<% end %>
-<br>
-<p> Friend's Meals </p>
-<% @friends_meals.each do |meal| %>
-  <%= link_to meal.title, meal_path(meal) %>
-  Hosted by <%= meal.host.email %>
-  at <%= meal.hosted_at %>
+
+  <p> Friend's Meals </p>
+  <% @friends_meals.each do |meal| %>
+    <%= link_to meal.title, meal_path(meal) %>
+    Hosted by <%= meal.host.email %>
+    at <%= meal.hosted_at %>
+    <br>
+  <% end %>
   <br>
-<% end %>
-<br>
-<p> My Invites </p>
-<% @invites.each do |meal| %>
-  <%= link_to meal.title, meal_path(meal) %>
-  Hosted by <%= meal.host.email %>
-  at <%= meal.hosted_at %>
+
+  <p> My Invites </p>
+  <% @invites.each do |meal| %>
+    <%= link_to meal.title, meal_path(meal) %>
+    Hosted by <%= meal.host.email %>
+    at <%= meal.hosted_at %>
+    <br>
+  <% end %>
   <br>
-<% end %>
+
+  <p> Declined Invites </p>
+  <% @declined.each do |meal| %>
+    <%= link_to meal.title, meal_path(meal) %>
+    Hosted by <%= meal.host.email %>
+    at <%= meal.hosted_at %>
+    <br>
+  <% end %>
   <br>
 
 <% else %>
-<p> Plan meals, pick dishes, invite your friends! </p>
-<br>
-<%= button_to 'Get Started!', new_user_registration_path, method: 'get', class: "btn btn-primary" %>
+  <p> Plan meals, pick dishes, invite your friends! </p>
+  <br>
+  <%= button_to 'Get Started!', new_user_registration_path, method: 'get', class: "btn btn-primary" %>
 <% end %>
