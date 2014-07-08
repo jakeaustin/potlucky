@@ -18,7 +18,7 @@ feature 'Visitor views homepage' do
 
     expect(page).to have_content (/signed up successfully/)
   end
-  scenario 'and creates unsuccessfully' do
+  scenario 'and creates an account unsuccessfully' do
     visit root_path
     click_button 'Get Started!'
     click_button 'Sign up'

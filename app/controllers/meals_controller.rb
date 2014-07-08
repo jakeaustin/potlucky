@@ -13,7 +13,6 @@ class MealsController < ApplicationController
   end
 
   def create
-    # current_user.meals.new(meal_params)
     @meal = Meal.new(meal_params)
     current_user.user_meals.new(meal: @meal, role: 'host', invite_status: 'attending')
 
@@ -25,7 +24,10 @@ class MealsController < ApplicationController
   end
 
   def show
-    @meal = Meal.find(params[:id])
+    if user_signed_in?
+      @meal = Meal.find(params[:id])
+      redirect_to root_path unless @meal.guest_users.include?(current_user)
+    end
   end
 
 
