@@ -2,18 +2,27 @@
 <h1> Meals Index</h1>
 <%= link_to 'New meal', new_meal_path %>
 <p> My Meals -- meals that current_user is host of</p>
+<% @my_meals.each do |meal| %>
+  <%= meal.title %>
+  Hosted by <%= meal.host.email %>
+  <br>
+<% end %>
 <br>
 <p> Friend's Meals -- meals that current_user is guest of & invite='attending'</p>
+<% @friends_meals.each do |meal| %>
+  <%= meal.title %>
+  Hosted by <%= meal.host.email %>
+  <br>
+<% end %>
 <br>
 <p> My Invites -- meals that current user is guest & invite='pending'</p>
-<% @meals.each do |meal| %>
+<% @invites.each do |meal| %>
   <%= meal.title %>
-  <% meal.users.each do |user| %>
-    <%= user.email %>
-  <% end %>
+  Hosted by <%= meal.host.email %>
+  <br>
+<% end %>
   <br>
 
-<% end %>
 <% else %>
 <p> Plan meals, pick dishes, invite your friends! </p>
 <br>
