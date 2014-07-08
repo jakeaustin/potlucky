@@ -12,6 +12,13 @@ class UsermealsController < ApplicationController
   end
 
   def update
+    @usermeal = UserMeal.find(params[:id])
+    @usermeal.invite_status = params[:invite_status]
+    if @usermeal.save
+      redirect_to meals_path(:meal_id)
+    else
+      flash.now[:alert] = 'there was an errors with your RSVP'
+    end
   end
 
 end
