@@ -5,7 +5,7 @@ feature 'Visitor views homepage' do
     visit root_path
 
     expect(page).to have_content 'Plan meals, pick dishes, invite your friends!'
-    expect(page).to have_content 'Get Started!'
+    expect(page).to have_button 'Get Started!'
   end
   scenario 'and creates an account successfully' do
 
