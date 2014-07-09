@@ -38,7 +38,7 @@ class MealsController < ApplicationController
   def destroy
     @meal = Meal.find(params[:id])
     @meal.destroy
-    redirect_to root_path, alert: "Meal deleted"
+    redirect_to root_path, notice: "Meal deleted"
   end
 
   private

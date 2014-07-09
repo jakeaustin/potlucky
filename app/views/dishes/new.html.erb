@@ -1,0 +1,41 @@
+<%= form_for [@meal, @dish] do |f| %>
+
+  <% if @dish.errors.any? %>
+  <div id="errorExplanation text-center">
+    <div class="bg-danger">
+      the form contains <%=pluralize(@dish.errors.count, "error") %>.
+    </div>
+    <ul>
+      <% @dish.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %> </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :thumb_url, 'Picture Link' %>
+    <%= f.text_field :thumb_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :recipe_url, 'Recipe Link' %>
+    <%= f.text_field :recipe_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Anyone can bring" %>
+    <br>
+    <%= f.check_box :can_be_claimed %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save Dish!", class: "btn btn-large btn-primary" %>
+  </div>
+
+<% end %>

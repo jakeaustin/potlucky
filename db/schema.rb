@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707204328) do
+ActiveRecord::Schema.define(version: 20140709140305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dishes", force: true do |t|
+    t.text    "name",                          null: false
+    t.text    "thumb_url",                     null: false
+    t.text    "recipe_url",                    null: false
+    t.boolean "can_be_claimed", default: true
+    t.integer "meal_id",                       null: false
+    t.integer "claimer_id",                    null: false
+  end
 
   create_table "meals", force: true do |t|
     t.text     "title",     null: false

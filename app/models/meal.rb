@@ -1,4 +1,5 @@
 class Meal < ActiveRecord::Base
+  has_many :dishes
   has_many :user_meals, dependent: :destroy
   has_many :users, through: :user_meals
   has_many :guest_user_meals, -> { where invite_status: ['attending', 'pending', 'decline'] }, class_name: UserMeal
