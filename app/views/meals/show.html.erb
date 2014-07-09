@@ -9,12 +9,9 @@
   <%= submit_tag "Search", :name => nil %>
   <% end %>
 
-  <p> Add Dishes through yummly or create your own </p>
   SEARCH YUMMLY OR
   <%= link_to 'Make your own', new_meal_dish_path(@meal) %>
 
-
-  <p> Delete this meal link </p>
   <%= button_to 'Delete Meal', meal_path(@meal), method: :delete, class: 'btn btn-warning' %>
 
 <% else %>
@@ -25,6 +22,7 @@
   </div>
 <% end %>
 
+<h2> Guests </h2>
 <ul>
   <% @guests.each do |guest| %>
   <li>
@@ -33,3 +31,11 @@
   <% end %>
 </ul>
 
+<h2> Dishes </h2>
+<ul>
+  <% @dishes.each do |dish| %>
+  <li>
+    <%= link_to dish.name, meal_dish_path(@meal, dish) %>
+  </li>
+  <% end %>
+</ul>

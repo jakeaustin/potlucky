@@ -1,0 +1,33 @@
+<h2><%= @dish.name %></h2>
+<img src=<%= @dish.thumb_url %> alt="Dish Picture">
+<%= link_to "See Recipe", @dish.recipe_url %>
+
+<% if @dish.can_be_claimed %>
+  <% if @claimer = @host %>
+    <% if current_user.id == @host.user_id %>
+      No one else has claimed this, you're responsible as host
+      ---link_to I will bring it, it's unclaimable
+      ---link_to delete this dish
+
+    <% else %>
+      This dish can be claimed
+    <% end %>
+
+  <% else %>
+    <% if current_user.id == @claimer.user_id %>
+      you are bringing this dish
+      --link to LOL NO I"M NOT, DELETE
+    <% else %>
+      This dish has been claimed
+    <% end %>
+  <% end %>
+
+
+<% else %>
+  <% if current_user.id == @host.user_id %>
+    You are bringing this dish
+    --link_to 'nvm it can be claimed'
+  <% else %>
+    The Host is providing this dish
+  <% end %>
+<% end %>

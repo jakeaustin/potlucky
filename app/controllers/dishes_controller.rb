@@ -24,6 +24,9 @@ class DishesController < ApplicationController
 
   def show
     @dish = Dish.find(params[:id])
+    @meal = Meal.find(params[:meal_id])
+    @host = @meal.host_user_meals
+    @claimer = UserMeal.find(@dish.claimer_id)
   end
 
   def update
