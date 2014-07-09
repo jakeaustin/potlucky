@@ -19,3 +19,11 @@
     <%= button_to 'Decline', meal_usermeal_path(id: @usermeal.id, meal_id: @meal, invite_status: 'decline'), method: :patch, class: 'bth btn-warning' %>
   </div>
 <% end %>
+
+<ul>
+  <% @guests.each do |guest| %>
+  <li>
+    <%= guest.email %>
+  </li>
+  <% end %>
+</ul>

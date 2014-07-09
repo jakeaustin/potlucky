@@ -27,6 +27,7 @@ class MealsController < ApplicationController
   def show
     if user_signed_in?
       @meal = Meal.find(params[:id])
+      @guests = @meal.attending_guests
       @usermeal = @meal.guest_user_meals.where(user_id: current_user).first
       redirect_to root_path unless @usermeal.present?
     else
