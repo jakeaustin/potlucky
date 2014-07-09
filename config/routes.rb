@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :usermeals, only: [:create, :update]
     resources :dishes
+    post '/dishes/search', to: 'dishes#search', as: :dish_search
   end
   root 'meals#index'
   # The priority is based upon order of creation: first created -> highest priority.

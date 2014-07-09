@@ -1,0 +1,16 @@
+<%= @results.attribution.html %>
+<br>
+<% @matches.each do |match| %>
+  <%= match.name %>
+  <img src=<%= match.thumbnail %> alt='No thumbnail available'>
+  <%= link_to 'View recipe', match.attribution.url %>
+
+  <%= form_for [@meal,Dish.new] do |f| %>
+    <%= f.hidden_field :name, value: match.name %>
+    <%= f.hidden_field :thumb_url, value: match.thumbnail %>
+    <%= f.hidden_field :recipe_url, value: match.attribution.url %>
+    <%= f.submit "Add to meal" %>
+  <% end %>
+  <hr>
+<% end %>
+

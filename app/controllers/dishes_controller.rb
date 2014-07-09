@@ -43,14 +43,21 @@ class DishesController < ApplicationController
     @meal = Meal.find(params[:meal_id])
     @dish = Dish.find(params[:id])
     @dish.destroy
-    redirect_to meal_path(@meal), notice: "Disc deleted"
+    redirect_to meal_path(@meal), notice: "Dish deleted"
   end
 
+  def search
+    @meal = Meal.find(params[:meal_id])
+    @results = Yummly.search(params[:search_term])
+    @matches = @results.matches.map do |match|
+      Yummly.find(match['id'])
+    end
+  end
 
   private
 
   def dish_params
-    params.require(:dish).permit(:name, :thumb_url, :recipe_url, :claimer_id, :meal_id, :can_be_claimed)
+    params.require(:dish).permit(:search_term, :name, :thumb_url, :recipe_url, :claimer_id, :meal_id, :can_be_claimed)
   end
 
 end

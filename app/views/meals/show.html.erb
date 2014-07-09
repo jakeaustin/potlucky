@@ -4,11 +4,15 @@
 
 <% if @meal.host == current_user %>
   <p> Invite Guests </p>
-  <%= form_tag(meal_users_path(@meal), :method => "get", id: "search-form")   do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-  <%= submit_tag "Search", :name => nil %>
+  <%= form_tag(meal_users_path(@meal), method: :get, id: "search-form")   do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+    <%= submit_tag "Search", :name => nil %>
   <% end %>
 
+  <%= form_tag(meal_dish_search_path(@meal), method: :post, id: 'search-form') do %>
+    <%= text_field_tag :search_term, params[:search_term], placeholder: "Search recipes" %>
+    <%= submit_tag "Search", name: nil %>
+  <% end %>
   SEARCH YUMMLY OR
   <%= link_to 'Make your own', new_meal_dish_path(@meal) %>
 
