@@ -3,20 +3,22 @@
 <%= link_to "See Recipe", @dish.recipe_url %>
 
 <% if @dish.can_be_claimed %>
-  <% if @claimer = @host %>
-    <% if current_user.id == @host.user_id %>
+  <% if @claimer == @host %>
+    <% if @current_guest == @host %>
       No one else has claimed this, you're responsible as host
-      ---link_to I will bring it, it's unclaimable
+      <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
       ---link_to delete this dish
 
     <% else %>
       This dish can be claimed
+      <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @current_guest.id, can_be_claimed: true), method: :patch, class: 'btn btn-primary' %>
+
     <% end %>
 
   <% else %>
-    <% if current_user.id == @claimer.user_id %>
+    <% if @current_guest == @claimer %>
       you are bringing this dish
-      --link to LOL NO I"M NOT, DELETE
+      --link to LOL NO I"M NOT, set claimer to host
     <% else %>
       This dish has been claimed
     <% end %>
@@ -24,8 +26,8 @@
 
 
 <% else %>
-  <% if current_user.id == @host.user_id %>
-    You are bringing this dish
+  <% if @current_guest == @host %>
+    You, as host, are bringing this dish
     --link_to 'nvm it can be claimed'
   <% else %>
     The Host is providing this dish

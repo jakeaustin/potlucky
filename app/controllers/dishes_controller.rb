@@ -18,18 +18,25 @@ class DishesController < ApplicationController
     end
   end
 
-  def index
-    @dishes = Dish.all
-  end
-
   def show
     @dish = Dish.find(params[:id])
     @meal = Meal.find(params[:meal_id])
     @host = @meal.host_user_meals
     @claimer = UserMeal.find(@dish.claimer_id)
+    @current_guest = current_user.user_meals.find_by(meal_id: @meal.id)
   end
 
   def update
+    @dish = Dish.find(params[:id])
+    @meal = Meal.find(params[:meal_id])
+    @dish.can_be_claimed = params[:can_be_claimed]
+    @dish.claimer_id = params[:claimer_id]
+
+    if @dish.save
+      redirect_to meal_path(@meal), notice: 'Responsibility for dish updated'
+    else
+      redirect_to meal_path(@meal), notice: 'Something went wrong during update'
+    end
   end
 
   def destroy
