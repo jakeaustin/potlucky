@@ -28,7 +28,7 @@
 <% else %>
   <% if @current_guest == @host %>
     You, as host, are bringing this dish
-    --link_to 'nvm it can be claimed'
+    <%= button_to "Anyone can bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: true), method: :patch, class: 'btn btn-danger' %>
   <% else %>
     The Host is providing this dish
   <% end %>
