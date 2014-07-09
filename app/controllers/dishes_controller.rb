@@ -40,6 +40,10 @@ class DishesController < ApplicationController
   end
 
   def destroy
+    @meal = Meal.find(params[:meal_id])
+    @dish = Dish.find(params[:id])
+    @dish.destroy
+    redirect_to meal_path(@meal), notice: "Disc deleted"
   end
 
 

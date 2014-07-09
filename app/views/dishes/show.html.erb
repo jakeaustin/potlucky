@@ -7,10 +7,10 @@
       <% if @claimer == @host %>
         No one else has claimed this yet, you're responsible as the host...
         <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
-        ---link_to delete this dish
+        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning' %>
       <% else %>
         this has been claimed
-        link to delete
+        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning' %>
       <% end %>
 
     <% else %>
