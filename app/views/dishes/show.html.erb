@@ -3,27 +3,27 @@
 <%= link_to "See Recipe", @dish.recipe_url %>
 
 <% if @dish.can_be_claimed %>
-  <% if @claimer == @host %>
     <% if @current_guest == @host %>
-      No one else has claimed this, you're responsible as host
-      <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
-      ---link_to delete this dish
+      <% if @claimer == @host %>
+        No one else has claimed this yet, you're responsible as the host...
+        <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
+        ---link_to delete this dish
+      <% else %>
+        this has been claimed
+        link to delete
+      <% end %>
 
     <% else %>
-      This dish can be claimed
-      <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @current_guest.id, can_be_claimed: true), method: :patch, class: 'btn btn-primary' %>
-
+      <% if @claimer == @current_guest %>
+        you said you are bringing this dish
+        <%= button_to "Actually, I will not bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: true), method: :patch, class: 'btn btn-warning' %>
+      <% elsif @claimer == @host %>
+        this dish can be claimed
+        <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @current_guest.id, can_be_claimed: true), method: :patch, class: 'btn btn-primary' %>
+      <% else %>
+        This dish has been claimed
+      <% end %>
     <% end %>
-
-  <% else %>
-    <% if @current_guest == @claimer %>
-      you are bringing this dish
-      --link to LOL NO I"M NOT, set claimer to host
-    <% else %>
-      This dish has been claimed
-    <% end %>
-  <% end %>
-
 
 <% else %>
   <% if @current_guest == @host %>
