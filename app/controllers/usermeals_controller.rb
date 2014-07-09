@@ -13,6 +13,9 @@ class UsermealsController < ApplicationController
 
   def update
     @usermeal = UserMeal.find(params[:id])
+    if @usermeal.role = 'host'
+      redirect_to meals_path(:meal_id), notice: 'Host cannot change status'
+    end
     @usermeal.invite_status = params[:invite_status]
     if @usermeal.save
       redirect_to meals_path(:meal_id)
