@@ -43,3 +43,12 @@
   </li>
   <% end %>
 </ul>
+
+<h2> Comments </h2>
+  <%= form_for [@meal,Comment.new] do |f| %>
+    <%= f.text_field :content, placeholder: 'already hungry!' %>
+    <%= f.submit "Leave Comment" %>
+  <% end %>
+
+  <%= render @meal.comments %>
+

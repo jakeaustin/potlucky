@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     resources :usermeals, only: [:create, :update]
     resources :dishes
     post '/dishes/search', to: 'dishes#search', as: :dish_search
+    resources :comments, only: [:create, :destroy]
   end
+  resources :dishes, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+
   root 'meals#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

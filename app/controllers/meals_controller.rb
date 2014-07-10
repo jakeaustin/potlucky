@@ -30,6 +30,7 @@ class MealsController < ApplicationController
       @guests = @meal.attending_guests
       @dishes = @meal.dishes
       @usermeal = @meal.guest_user_meals.where(user_id: current_user).first
+      @comments = @meal.comments
       redirect_to root_path unless @usermeal.present?
     else
       redirect_to root_path

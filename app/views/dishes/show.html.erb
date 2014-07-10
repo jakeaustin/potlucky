@@ -33,3 +33,18 @@
     The Host is providing this dish
   <% end %>
 <% end %>
+
+<h2> Comments </h2>
+  <%# posts comments to MEAL_COMMENTS instead of DISH %>
+  <%= form_for [@dish, Comment.new] do |f| %>
+    <%= f.text_field :content, placeholder: 'already hungry!' %>
+    <%= f.submit "Leave Comment" %>
+  <% end %>
+
+  <%= render @dish.comments %>
+
+<%#= form_tag(meal_dish_comments_path(@meal, @dish, Comment.new), method: :post)  do %>
+    <%#= text_field_tag :content, placeholder: "already hungry!" %>
+    <%#= submit_tag "Leave Comment", :name => nil %>
+  <%# end %>
+
