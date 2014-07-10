@@ -7,11 +7,8 @@ before_action :authenticate_user!
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.commentable = @commentable
-    if @comment.save
+    if @comment.save!
       redirect_to :back, notice: 'Comment posted!'
-    else
-      flash.now[:alert] = @comment.errors.full_messages.join(', ')
-      render :new
     end
   end
 

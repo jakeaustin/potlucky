@@ -3,11 +3,9 @@ class InvitesController < ApplicationController
   def create
    @invite = Invite.new(invite_params)
 
-    if @invite.save
+    if @invite.save!
       flash.now[:success] = "Invite sent!"
       redirect_to :back
-    else
-      flash.now[:alert] = "there was an error sending your invite"
     end
   end
 
@@ -17,10 +15,8 @@ class InvitesController < ApplicationController
       redirect_to meal_path(params[:meal_id]), notice: 'Host cannot change status'
     else
       @invite.invite_status = params[:invite_status]
-      if @invite.save
+      if @invite.save!
         redirect_to meal_path(params[:meal_id])
-      else
-        flash.now[:alert] = 'there was an errors with your RSVP'
       end
     end
   end
