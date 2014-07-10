@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :meals do
     resources :users, only: [:index]
-    resources :usermeals, only: [:create, :update]
+    resources :invites, only: [:create, :update]
     resources :dishes
     post '/dishes/search', to: 'dishes#search', as: :dish_search
     resources :comments, only: [:create, :destroy]

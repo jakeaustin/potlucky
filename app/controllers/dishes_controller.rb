@@ -8,7 +8,7 @@ class DishesController < ApplicationController
   def create
     @meal = Meal.find(params[:meal_id])
     @dish = Dish.new(dish_params)
-    @dish.claimer_id = @meal.host_user_meals.id
+    @dish.claimer_id = @meal.host_invite.id
     @dish.meal_id = @meal.id
 
     if @dish.save
@@ -21,9 +21,9 @@ class DishesController < ApplicationController
   def show
     @dish = Dish.find(params[:id])
     @meal = Meal.find(params[:meal_id])
-    @host = @meal.host_user_meals
-    @claimer = UserMeal.find(@dish.claimer_id)
-    @current_guest = current_user.user_meals.find_by(meal_id: @meal.id)
+    @host = @meal.host_invite
+    @claimer = Invite.find(@dish.claimer_id)
+    @current_guest = current_user.invites.find_by(meal_id: @meal.id)
   end
 
   def update

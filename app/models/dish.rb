@@ -1,6 +1,6 @@
 class Dish < ActiveRecord::Base
   belongs_to :meal
-  belongs_to :usermeal, foreign_key: :claimer_id
+  belongs_to :invite, foreign_key: :claimer_id
   has_many :comments, as: :commentable, dependent: :destroy
 
 

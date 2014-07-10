@@ -15,7 +15,7 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
-    current_user.user_meals.new(meal: @meal, role: 'host', invite_status: 'attending')
+    current_user.invites.new(meal: @meal, role: 'host', invite_status: 'attending')
 
     if current_user.save
       redirect_to root_path, notice: "Your meal was created"
@@ -29,9 +29,9 @@ class MealsController < ApplicationController
       @meal = Meal.find(params[:id])
       @guests = @meal.attending_guests
       @dishes = @meal.dishes
-      @usermeal = @meal.guest_user_meals.where(user_id: current_user).first
+      @invite = @meal.guest_invites.find_by(user_id: current_user)
       @comments = @meal.comments
-      redirect_to root_path unless @usermeal.present?
+      redirect_to root_path unless @invite.present?
     else
       redirect_to root_path
     end

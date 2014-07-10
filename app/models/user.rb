@@ -3,17 +3,17 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :user_meals, dependent: :destroy
-  has_many :meals, through: :user_meals
-  has_many :hosted_user_meals, -> { where role: 'host' }, class_name: UserMeal
-  has_many :hosted_meals, through: :hosted_user_meals, dependent: :destroy, source: :meal
+  has_many :invites, dependent: :destroy
+  has_many :meals, through: :invites
+  has_many :hosted_invites, -> { where role: 'host' }, class_name: Invite
+  has_many :hosted_meals, through: :hosted_invites, dependent: :destroy, source: :meal
 
-  has_many :guest_user_meals, -> { where role: 'guest', invite_status: 'attending' }, class_name: UserMeal
-  has_many :guest_meals, through: :guest_user_meals, source: :user, source: :meal
-  has_many :invited_user_meals, -> { where role: 'guest', invite_status: 'pending' }, class_name: UserMeal
-  has_many :invited_meals, through: :invited_user_meals, source: :user, source: :meal
-  has_many :declined_user_meals, -> { where role: 'guest', invite_status: 'decline' }, class_name: UserMeal
-  has_many :declined_meals, through: :declined_user_meals, source: :user, source: :meal
+  has_many :guest_invites, -> { where role: 'guest', invite_status: 'attending' }, class_name: Invite
+  has_many :guest_meals, through: :guest_invites, source: :user, source: :meal
+  has_many :invited_invites, -> { where role: 'guest', invite_status: 'pending' }, class_name: Invite
+  has_many :invited_meals, through: :invited_invites, source: :user, source: :meal
+  has_many :declined_invites, -> { where role: 'guest', invite_status: 'decline' }, class_name: Invite
+  has_many :declined_meals, through: :declined_invites, source: :user, source: :meal
 
 
 
