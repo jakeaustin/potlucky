@@ -1,5 +1,5 @@
 <h2><%= @dish.name %></h2>
-<img src=<%= @dish.thumb_url %> alt="Dish Picture">
+<img src=<%= @dish.thumb_url %> alt="No Picture / Bad URL">
 <%= link_to "See Recipe", @dish.recipe_url %>
 
 <% if @dish.can_be_claimed %>

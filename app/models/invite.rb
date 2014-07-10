@@ -3,5 +3,4 @@ class Invite < ActiveRecord::Base
   belongs_to :meal
   has_many :dishes
 
-
 end

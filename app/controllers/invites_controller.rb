@@ -1,8 +1,8 @@
 class InvitesController < ApplicationController
 
   def create
-   @invite = Invite.new(user_id: params[:user_id], meal_id: params[:meal_id], role: params[:role], invite_status: params[:invite_status])
-  # @invite = Invite.new(usermeal_params)
+   #@invite = Invite.new(user_id: params[:user_id], meal_id: params[:meal_id], role: params[:role], invite_status: params[:invite_status])
+   @invite = Invite.new(usermeal_params)
 
     if @invite.save
       flash.now[:success] = "Invite sent!"
