@@ -14,7 +14,7 @@ class DishesController < ApplicationController
     if @dish.save
       redirect_to meal_path(@meal), notice: "dish added to meal"
     else
-      render :new
+      redirect_to meal_path(@meal), notice: "there was an error adding the dish"
     end
   end
 
