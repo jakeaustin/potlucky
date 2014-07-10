@@ -15,6 +15,12 @@ before_action :authenticate_user!
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to :back, notice: "Comment deleted"
+  end
+
   private
 
   def comment_params
