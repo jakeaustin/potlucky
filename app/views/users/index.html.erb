@@ -4,11 +4,10 @@
     <%= user.invites.find_by(meal_id: params[:meal_id]).invite_status %>  |  <%= user.email %>
   <% else %>
     <div class="block">
-    <%#= button_to 'Invite', meal_invites_path(user_id: user, role: 'guest', invite_status: 'pending'), method: :post, class: 'btn btn-primary' %>
 
-    <%= form_for :invite do |f| %>
-      <%= f.hidden_field :meal_id, value: @meal %>
-      <%= f.hidden_field :user_id, value: user %>
+    <%= form_for [@meal, Invite.new] do |f| %>
+      <%= f.hidden_field :meal_id, value: @meal.id %>
+      <%= f.hidden_field :user_id, value: user.id %>
       <%= f.hidden_field :role, value: 'guest' %>
       <%= f.hidden_field :invite_status, value: 'pending' %>
       <%= f.submit "Invite" %>
