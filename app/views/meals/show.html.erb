@@ -3,53 +3,31 @@
 <p><%= @meal.location %> | <%= @meal.hosted_at.strftime("%F | %r") %></p>
 
 <% if @meal.host == current_user %>
-  Invite Guests
-  <%= form_tag(meal_users_path(@meal), method: :get, id: "search-form")   do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-    <%= submit_tag "Search", :name => nil %>
-  <% end %>
-
-  SEARCH YUMMLY OR
-  <%= link_to 'Make your own', new_meal_dish_path(@meal) %>
-
-  <%= form_tag(meal_dish_search_path(@meal), method: :post, id: 'search-form') do %>
-    <%= text_field_tag :search_term, params[:search_term], placeholder: "Search recipes" %>
-    <%= submit_tag "Search", name: nil %>
-  <% end %>
-
-  <%= button_to 'Delete Meal', meal_path(@meal), method: :delete, class: 'btn btn-warning' %>
-
+  <div>
+    <%= render 'host_options' %>
+  </div>
 <% else %>
   <div>
-    <h4>RSVP: <%= @usermeal.invite_status %></h4>
-    <%= button_to 'Attending', meal_usermeal_path(id: @usermeal.id, meal_id: @meal, invite_status: 'attending'), method: :patch, class: 'btn btn-success' %>
-    <%= button_to 'Decline', meal_usermeal_path(id: @usermeal.id, meal_id: @meal, invite_status: 'decline'), method: :patch, class: 'bth btn-warning' %>
+    <%= render 'rsvp' %>
   </div>
 <% end %>
 
-<h2> Guests </h2>
-<ul>
-  <% @guests.each do |guest| %>
-  <li>
-    <%= guest.email %>
-  </li>
-  <% end %>
-</ul>
+<div>
+  <%= render 'guest_list' %>
+</div>
 
-<h2> Dishes </h2>
-<ul>
-  <% @dishes.each do |dish| %>
-  <li>
-    <%= link_to dish.name, meal_dish_path(@meal, dish) %>
-  </li>
-  <% end %>
-</ul>
+<div>
+  <h2> Dishes </h2>
+  <ul>
+    <%= render @meal.dishes %>
+  </ul>
+</div>
 
 <h2> Comments </h2>
-  <%= form_for [@meal,Comment.new] do |f| %>
-    <%= f.text_field :content, placeholder: 'already hungry!' %>
-    <%= f.submit "Leave Comment" %>
-  <% end %>
+<%= form_for [@meal,Comment.new] do |f| %>
+  <%= f.text_field :content, placeholder: 'already hungry!' %>
+  <%= f.submit "Leave Comment" %>
+<% end %>
 
-  <%= render @meal.comments %>
+<%= render @meal.comments %>
 

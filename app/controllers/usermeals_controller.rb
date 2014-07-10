@@ -13,14 +13,15 @@ class UsermealsController < ApplicationController
 
   def update
     @usermeal = UserMeal.find(params[:id])
-    if @usermeal.role = 'host'
-      redirect_to meals_path(:meal_id), notice: 'Host cannot change status'
-    end
-    @usermeal.invite_status = params[:invite_status]
-    if @usermeal.save
-      redirect_to meals_path(:meal_id)
+    if @usermeal.role == 'host'
+      redirect_to meal_path(params[:meal_id]), notice: 'Host cannot change status'
     else
-      flash.now[:alert] = 'there was an errors with your RSVP'
+      @usermeal.invite_status = params[:invite_status]
+      if @usermeal.save
+        redirect_to meal_path(params[:meal_id])
+      else
+        flash.now[:alert] = 'there was an errors with your RSVP'
+      end
     end
   end
 

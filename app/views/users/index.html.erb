@@ -1,3 +1,4 @@
+<%= button_to 'Back to meal', meal_path(params[:meal_id]), method: :get, class: 'btn btn-primary' %>
 <% @users.each do |user| %>
 <% if Meal.find(params[:meal_id]).guest_users.include?(user) %>
 <%= user.user_meals.where(meal_id: params[:meal_id]).first.invite_status %>  |  <%= user.email %>

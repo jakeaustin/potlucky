@@ -1,0 +1,3 @@
+<h4>RSVP: <%= @usermeal.invite_status %></h4>
+    <%= button_to 'Attending', meal_usermeal_path(id: @usermeal.id, meal_id: @meal, invite_status: 'attending', role: 'guest'), method: :patch, class: 'btn btn-success' %>
+    <%= button_to 'Decline', meal_usermeal_path(id: @usermeal.id, meal_id: @meal, invite_status: 'decline',  role: 'guest'), method: :patch, class: 'bth btn-warning' %>

@@ -6,7 +6,7 @@
   <% @my_meals.each do |meal| %>
     <%= link_to meal.title, meal_path(meal) %>
     Hosted by <%= meal.host.email %>
-    at <%= meal.hosted_at %>
+    on <%= meal.hosted_at.strftime("%F at %r") %>
     <br>
   <% end %>
   <br>
@@ -15,7 +15,7 @@
   <% @friends_meals.each do |meal| %>
     <%= link_to meal.title, meal_path(meal) %>
     Hosted by <%= meal.host.email %>
-    at <%= meal.hosted_at %>
+    on <%= meal.hosted_at.strftime("%F at %r") %>
     <br>
   <% end %>
   <br>
@@ -24,7 +24,7 @@
   <% @invites.each do |meal| %>
     <%= link_to meal.title, meal_path(meal) %>
     Hosted by <%= meal.host.email %>
-    at <%= meal.hosted_at %>
+    on <%= meal.hosted_at.strftime("%F at %r") %>
     <br>
   <% end %>
   <br>
@@ -33,7 +33,7 @@
   <% @declined.each do |meal| %>
     <%= link_to meal.title, meal_path(meal) %>
     Hosted by <%= meal.host.email %>
-    at <%= meal.hosted_at %>
+    on <%= meal.hosted_at.strftime("%F at %r") %>
     <br>
   <% end %>
   <br>

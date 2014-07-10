@@ -1,0 +1,8 @@
+<h2> Guests </h2>
+<ul>
+  <% @guests.each do |guest| %>
+  <li>
+    <%= guest.email %>
+  </li>
+  <% end %>
+</ul>
