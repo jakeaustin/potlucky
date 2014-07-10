@@ -20,7 +20,7 @@ class MealsController < ApplicationController
     if current_user.save
       redirect_to root_path, notice: "Your meal was created"
     else
-      #
+      redirect_to :new, notice: "there was an error saving your meal"
     end
   end
 

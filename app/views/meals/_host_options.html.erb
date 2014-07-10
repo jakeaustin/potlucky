@@ -12,4 +12,4 @@
     <%= submit_tag "Search", name: nil %>
   <% end %>
 
-  <%= button_to 'Delete Meal', meal_path(@meal), method: :delete, class: 'btn btn-warning' %>
+  <%= button_to 'Delete Meal', meal_path(@meal), method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>

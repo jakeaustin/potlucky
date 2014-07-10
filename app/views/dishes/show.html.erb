@@ -8,10 +8,10 @@
         No one has vouched for this dish, yet.
         As the host, you are ultimately responsible for it...
         <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
-        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning' %>
+        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
       <% else %>
         Someone vouched to bring this dish
-        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning' %>
+        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
       <% end %>
 
     <% else %>
