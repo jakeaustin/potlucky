@@ -18,6 +18,18 @@
   display: inline-block;
 }
 
+.welcome-background {
+  background: #666666 url('http://images5.alphacoders.com/414/414957.jpg');
+  background-size: cover;
+}
+
+.welcome-msg {
+  width: 80%;
+  margin-left: 10%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
 .navbar-default {
   background-color: #97b35e;
   border-color: #364024;

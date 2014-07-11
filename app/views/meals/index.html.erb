@@ -39,12 +39,19 @@
   <br>
 
 <% else %>
-
-  <div>
-    <h1 class="cover-heading">Plan meals, pick food, invite your friends!</h1>
-    <p class="lead">Potlucky is a thing that does things yay things, this is a massive lead in</p>
-    <p class="lead">
-    <%= link_to 'Get Started!', new_user_registration_path, method: :get, class: 'btn btn-lg btn-primary' %>
-    </p>
+  <div class="welcome-background">
+    <div class="welcome-msg">
+      <h1 class="cover-heading">Plan meals, pick food, invite your friends!</h1>
+      <p class="lead">
+        Potlucky is a thing that does things yay things, this is a massive lead in in which i explain how we need to take lunch and dinner back from the restaurants and delivery services.
+      </p>
+      <p class="lead">
+        Eating is LIFE, and we shouldn't think of cooking as a chore to outsource. Make your own food, be social, and be happy.
+      </p>
+      <p class="lead">
+      <%= link_to 'Get Started!', new_user_registration_path, method: :get, class: 'btn btn-lg btn-primary' %>
+      </p>
+      <br>
+    </div>
   </div>
 <% end %>
