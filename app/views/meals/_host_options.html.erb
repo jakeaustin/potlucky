@@ -1,15 +1,19 @@
- Invite Guests
+<h4>Invite Guests</h4>
 <%= form_tag(meal_users_path(@meal), method: :get, id: "search-form")   do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
   <%= submit_tag "Search", name: nil %>
 <% end %>
-
-SEARCH YUMMLY OR
-<%= link_to 'Make your own', new_meal_dish_path(@meal) %>
-
+<hr>
+<h4> Add Food </h4>
+<h5>
+  Search or
+  <%= link_to 'Make your own', new_meal_dish_path(@meal) %>
+</h5>
 <%= form_tag(meal_dish_search_path(@meal), method: :post, id: 'search-form') do %>
   <%= text_field_tag :search_term, params[:search_term], placeholder: "Search recipes" %>
   <%= submit_tag "Search", name: nil %>
 <% end %>
 
+<hr>
 <%= button_to 'Delete Meal', meal_path(@meal), method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
+<br>

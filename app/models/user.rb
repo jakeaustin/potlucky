@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :invites, dependent: :destroy
   has_many :meals, through: :invites
+  has_many :comments, dependent: :destroy
+
   has_many :hosted_invites, -> { where role: 'host' }, class_name: Invite
   has_many :hosted_meals, through: :hosted_invites, dependent: :destroy, source: :meal
-
   has_many :guest_invites, -> { where role: 'guest', invite_status: 'attending' }, class_name: Invite
   has_many :guest_meals, through: :guest_invites, source: :meal
   has_many :invited_invites, -> { where role: 'guest', invite_status: 'pending' }, class_name: Invite

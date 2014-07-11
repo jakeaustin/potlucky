@@ -1,36 +1,51 @@
-<p> Host: <%= @meal.host.email %></p>
-<h2><%= @meal.title %></h2>
-<p><%= @meal.location %> | <%= @meal.hosted_at.strftime("%F | %r") %></p>
-
-<% if @meal.host == current_user %>
-  <div>
-    <%= render 'host_options' %>
+<div class="row">
+  <div class="col-md-4">
+    <h4> Host: <%= @meal.host.email %></h4>
   </div>
-<% else %>
-  <div>
-    <%= render 'rsvp' %>
+  <div class="col-md-4">
+    <p class="meal-title"><%= @meal.title %></p>
   </div>
-<% end %>
-
-<div>
-  <%= render 'guest_list' %>
+  <div class="col-md-4">
+    <h5>
+      <%= @meal.hosted_at.strftime("%F | %r") %>
+      @ <%= @meal.location %>
+    </h5>
+  </div>
 </div>
 
-<div>
-  <h2> Dishes </h2>
-  <% if @meal.dishes.empty? %>
-    <p> The host hasn't added any dishes </p>
-  <% end %>
-  <ul>
-    <%= render @meal.dishes %>
-  </ul>
+<div class="row">
+  <div class="col-md-3">
+    <% if @meal.host == current_user %>
+      <div class="options">
+        <%= render 'host_options' %>
+      </div>
+    <% else %>
+      <div class="options">
+        <%= render 'rsvp' %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= render 'guest_list' %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2> Things to bring </h2>
+    <% if @meal.dishes.empty? %>
+      <p> The host hasn't added any dishes </p>
+    <% end %>
+    <ul>
+      <%= render @meal.dishes %>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <h2> Comments </h2>
+    <%= form_for [@meal,Comment.new] do |f| %>
+      <%= f.text_field :content, placeholder: 'already hungry!' %>
+      <%= f.submit "Leave Comment" %>
+    <% end %>
+    <hr>
+    <%= render @meal.comments %>
+  </div>
 </div>
-
-<h2> Comments </h2>
-<%= form_for [@meal,Comment.new] do |f| %>
-  <%= f.text_field :content, placeholder: 'already hungry!' %>
-  <%= f.submit "Leave Comment" %>
-<% end %>
-
-<%= render @meal.comments %>
-

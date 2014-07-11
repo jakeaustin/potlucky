@@ -1,11 +1,12 @@
 <p>
-  <i><%= comment.user.email %> commented:</i><br>
-  <%= comment.content %>
   <% if current_user == comment.user %>
     <% if  comment.commentable_type == 'Dish' %>
-      <%= link_to 'X', dish_comment_path(@dish, comment), method: :delete, class: "btn btn-warning", confirm: "Are you sure?" %>
+      <%= link_to 'X', dish_comment_path(@dish, comment), method: :delete, class: "btn btn-warning", confirm: "Are you sure?" %>  |
     <% else %>
-      <%= link_to 'X', meal_comment_path(@meal, comment), method: :delete, class: "btn btn-warning", confirm: "Are you sure?" %>
+      <%= link_to 'X', meal_comment_path(@meal, comment), method: :delete, class: "btn btn-warning", confirm: "Are you sure?" %>  |
     <% end %>
   <% end %>
+  <i><%= comment.user.email %> commented:</i><br>
+  <%= comment.content %>
 </p>
+<hr>

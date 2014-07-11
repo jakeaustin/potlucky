@@ -14,12 +14,13 @@
  *= require_self
  */
 
-.block {
-  display: inline-block;
-}
 
 body {
   background-color: #97b35e;
+}
+
+[type="submit"]:hover {
+  background-color: #666666;
 }
 
 .navbar-brand {
@@ -49,6 +50,14 @@ body {
   text-decoration: underline;
 }
 
+.meal-title {
+  font-size: 3em;
+  text-decoration: underline;
+}
+
+.options {
+  border: 2px solid black;
+}
 
 .navbar-default {
   background-color: #666633;

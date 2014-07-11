@@ -10,4 +10,5 @@ class Meal < ActiveRecord::Base
   has_many :attending_guests, through: :attending_invites, source: :user
   has_one :host_invite, -> { where role: 'host' }, class_name: Invite
   has_one :host, through: :host_invite, source: :user
+
 end
