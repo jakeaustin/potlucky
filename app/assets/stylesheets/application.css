@@ -18,6 +18,15 @@
   display: inline-block;
 }
 
+body {
+  background-color: #97b35e;
+}
+
+.navbar-brand {
+  font-family: 'Oleo Script';
+  font-size: 2em;
+}
+
 .welcome-background {
   background: #666666 url('http://images5.alphacoders.com/414/414957.jpg');
   background-size: cover;
@@ -30,8 +39,19 @@
   color: white;
 }
 
+.panel-body a {
+  color: navy;
+  font-family: 'Bubblegum Sans';
+}
+
+.panel-body a:hover {
+  color: cyan;
+  text-decoration: underline;
+}
+
+
 .navbar-default {
-  background-color: #97b35e;
+  background-color: #666633;
   border-color: #364024;
 }
 .navbar-default .navbar-brand {

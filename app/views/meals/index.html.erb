@@ -1,42 +1,96 @@
 <% if user_signed_in? %>
-  <h1> Meals Index</h1>
-  <%= link_to 'New meal', new_meal_path %>
+  <%= button_to 'New meal', new_meal_path, class: 'btn btn-lg btn-default' %>
+  <br><br>
 
-  <p> My Meals </p>
-  <% @my_meals.each do |meal| %>
-    <%= link_to meal.title, meal_path(meal) %>
-    Hosted by <%= meal.host.email %>
-    on <%= meal.hosted_at.strftime("%F at %r") %>
-    <br>
-  <% end %>
-  <br>
+  <div class="panel panel-success row">
+    <div class="panel-heading">
+      <h1> Meals I'm Hosting </h1>
+    </div>
+    <div class="panel-body">
+      <% if @my_meals.empty? %>
+        <h2> You aren't hosting any meals </h2>
+      <% end %>
+      <% @my_meals.each do |meal| %>
+        <div class="row">
+          <h2 class="col-md-6">
+            <%= link_to meal.title, meal_path(meal) %>
+          </h2>
+          <h3 class="col-md-6">
+            <%= meal.hosted_at.strftime("%F || %r") %>
+            @ <%= meal.location %>
+          </h3>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+  </div>
 
-  <p> Friend's Meals </p>
-  <% @friends_meals.each do |meal| %>
-    <%= link_to meal.title, meal_path(meal) %>
-    Hosted by <%= meal.host.email %>
-    on <%= meal.hosted_at.strftime("%F at %r") %>
-    <br>
-    <% end %>
-  <br>
+  <div class="panel panel-primary row">
+    <div class='panel-heading'>
+      <h1> Meals I'm Attending </h1>
+    </div>
+    <div class='panel-body'>
+      <% if @friends_meals.empty? %>
+        <h2> You aren't attending any meals </h2>
+      <% end %>
+      <% @friends_meals.each do |meal| %>
+        <div class="row">
+          <h2 class="col-md-6">
+            <%= link_to meal.title, meal_path(meal) %>
+          </h2>
+          <h3 class="col-md-6">
+            <%= meal.hosted_at.strftime("%F || %r") %>
+            @ <%= meal.location %>
+          </h3>
+        </div>
+        <hr>
+      <hr>
+      <% end %>
+    </div>
+  </div>
 
-  <p> My Invites </p>
-  <% @invites.each do |meal| %>
-    <%= link_to meal.title, meal_path(meal) %>
-    Hosted by <%= meal.host.email %>
-    on <%= meal.hosted_at.strftime("%F at %r") %>
-    <br>
-  <% end %>
-  <br>
+  <div class="panel panel-info row">
+    <div class='panel-heading'>
+      <h1> My Invites </h1>
+    </div>
+    <div class='panel-body'>
+      <% if @invites.empty? %>
+        <h2> You don't have any invitations </h2>
+      <% end %>
+      <% @invites.each do |meal| %>
+        <div class="row">
+          <h2 class="col-md-6">
+            <%= link_to meal.title, meal_path(meal) %>
+          </h2>
+          <h3 class="col-md-6">
+            <%= meal.hosted_at.strftime("%F || %r") %>
+            @ <%= meal.location %>
+          </h3>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+  </div>
 
-  <p> Declined Invites </p>
-  <% @declined.each do |meal| %>
-    <%= link_to meal.title, meal_path(meal) %>
-    Hosted by <%= meal.host.email %>
-    on <%= meal.hosted_at.strftime("%F at %r") %>
-    <br>
-  <% end %>
-  <br>
+  <div class="panel panel-danger row">
+    <div class='panel-heading'>
+      <h1> Declined Invites </h1>
+    </div>
+    <div class='panel-body'>
+      <% @declined.each do |meal| %>
+        <div class="row">
+          <h2 class="col-md-6">
+            <%= link_to meal.title, meal_path(meal) %>
+          </h2>
+          <h3 class="col-md-6">
+            <%= meal.hosted_at.strftime("%F || %r") %>
+            @ <%= meal.location %>
+          </h3>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+  </div>
 
 <% else %>
   <div class="welcome-background">
@@ -48,6 +102,7 @@
       <p class="lead">
         Eating is LIFE, and we shouldn't think of cooking as a chore to outsource. Make your own food, be social, and be happy.
       </p>
+      <br><br>
       <p class="lead">
       <%= link_to 'Get Started!', new_user_registration_path, method: :get, class: 'btn btn-lg btn-primary' %>
       </p>
