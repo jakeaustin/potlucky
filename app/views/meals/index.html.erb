@@ -17,7 +17,7 @@
     Hosted by <%= meal.host.email %>
     on <%= meal.hosted_at.strftime("%F at %r") %>
     <br>
-  <% end %>
+    <% end %>
   <br>
 
   <p> My Invites </p>
@@ -39,7 +39,12 @@
   <br>
 
 <% else %>
-  <p> Plan meals, pick dishes, invite your friends! </p>
-  <br>
-  <%= button_to 'Get Started!', new_user_registration_path, method: 'get', class: "btn btn-primary" %>
+
+  <div class="inner cover text-center">
+    <h1 class="cover-heading">Plan meals, pick food, invite your friends!</h1>
+    <p class="lead">Potlucky is a thing that does things yay things, this is a massive lead in</p>
+    <p class="lead">
+    <%= link_to 'Get Started!', new_user_registration_path, method: :get, class: 'btn btn-lg btn-primary' %>
+    </p>
+  </div>
 <% end %>
