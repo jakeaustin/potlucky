@@ -18,6 +18,9 @@
 
 <div>
   <h2> Dishes </h2>
+  <% if @meal.dishes.empty? %>
+    <p> The host hasn't added any dishes </p>
+  <% end %>
   <ul>
     <%= render @meal.dishes %>
   </ul>

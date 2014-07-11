@@ -1,4 +1,9 @@
 <h2> Guests </h2>
+<% if @guests.empty? %>
+  <p>
+    You haven't invited any guests
+  </p>
+<% end %>
 <ul>
   <% @guests.each do |guest| %>
   <li>
