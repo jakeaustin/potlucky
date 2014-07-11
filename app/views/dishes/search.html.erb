@@ -1,14 +1,25 @@
-<%= raw @results.attribution.html %>
+<%= raw @banner %>
 <br>
 <% @matches.each do |match| %>
-  <%= match.name %>
-  <img src=<%= match.thumbnail %> alt='No thumbnail available'>
-  <%= link_to 'View recipe', match.attribution.url %>
+  <%= match[:name]%>
+  <img src=<%= match[:thumb] %> alt='No thumbnail available'>
+  <div>
+    <ul>Recipe:<br>
+      <% match[:ingr].each do |ingredient| %>
+        <li><%=ingredient%></li>
+      <% end %>
+    </ul>
+  </div>
+  <div>
+    Rating: <%= match[:rate] %>
+    <br>
+    <%= link_to 'See it on Yummly', match[:link] %>
+  </div>
 
   <%= form_for [@meal,Dish.new] do |f| %>
-    <%= f.hidden_field :name, value: match.name %>
-    <%= f.hidden_field :thumb_url, value: match.thumbnail %>
-    <%= f.hidden_field :recipe_url, value: match.attribution.url %>
+    <%= f.hidden_field :name, value: match[:name] %>
+    <%= f.hidden_field :thumb_url, value: match[:thumb] %>
+    <%= f.hidden_field :recipe_url, value: match[:link] %>
     <%= f.submit "Add to meal" %>
   <% end %>
   <hr>

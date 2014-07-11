@@ -49,8 +49,16 @@ class DishesController < ApplicationController
   def search
     @meal = Meal.find(params[:meal_id])
     @results = Yummly.search(params[:search_term])
-    @matches = @results.matches.map do |match|
-      Yummly.find(match['id'])
+    @banner = @results.attribution.html
+    @matches = @results.matches.map do |matched|
+      match = Yummly.find(matched['id'])
+      subset = {
+                name: match.name,
+                thumb: match.thumbnail,
+                ingr: match.ingredients,
+                rate: match.rating,
+                link: match.attribution.url
+               }
     end
   end
 
