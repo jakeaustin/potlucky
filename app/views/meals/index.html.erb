@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= button_to 'New meal', new_meal_path, class: 'btn btn-lg btn-default' %>
+  <%= button_to 'New meal', new_meal_path, class: 'btn btn-lg btn-default', method: :get %>
   <br><br>
 
   <div class="panel panel-success row">
