@@ -1,4 +1,6 @@
-<li>
-  <%= link_to dish.name, meal_dish_path(@meal, dish) %>
-</li>
-<br>
+<td class="dish-flair">
+  <%= link_to dish.name, meal_dish_path(@meal, dish), class: 'btn btn-sm btn-success' %>
+  <br>
+  <img src=<%= dish.thumb_url %> alt="No Picture / Bad URL">
+</td>
+

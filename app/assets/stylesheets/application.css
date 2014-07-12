@@ -14,13 +14,25 @@
  *= require_self
  */
 
+.meal-box {
+  background-color: rgba(102, 102, 51, 0.5);
+  border: 2px solid black;
+  border-radius: 20px;
+  color:#eee;
+}
 
 body {
   background-color: #97b35e;
 }
 
+
+[type="submit"]{
+color: black;
+}
+
 [type="submit"]:hover {
   background-color: #666666;
+  color: black;
 }
 
 .navbar-brand {
@@ -55,8 +67,8 @@ body {
   text-decoration: underline;
 }
 
-.options {
-  border: 2px solid black;
+.dish-flair {
+  border: 2px solid white;
 }
 
 .navbar-default {

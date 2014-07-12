@@ -1,48 +1,56 @@
 <div class="row">
-  <div class="col-md-4">
-    <h4> Host: <%= @meal.host.email %></h4>
+  <div class="col-md-3">
+    <h2 class="meal-box options">
+    <p>Host: </p>
+      <%= @meal.host.email %></h2>
   </div>
-  <div class="col-md-4">
-    <p class="meal-title"><%= @meal.title %></p>
+  <div class="col-md-4 col-md-offset-1">
+    <p class="meal-title meal-box"><%= @meal.title %></p>
   </div>
-  <div class="col-md-4">
-    <h5>
-      <%= @meal.hosted_at.strftime("%F | %r") %>
-      @ <%= @meal.location %>
-    </h5>
+  <div class="col-md-3 col-md-offset-1">
+    <h2 class="meal-box">
+      <%= @meal.hosted_at.strftime("%B %d, '%y | %I:%M %p") %>
+      <p>@ <%= @meal.location %></p></h2>
+
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-3">
     <% if @meal.host == current_user %>
-      <div class="options">
+      <div class="options meal-box">
         <%= render 'host_options' %>
       </div>
     <% else %>
-      <div class="options">
+      <div class="meal-box">
         <%= render 'rsvp' %>
       </div>
     <% end %>
 
-    <div>
+    <div class='meal-box padding'>
       <%= render 'guest_list' %>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4 col-md-offset-1 meal-box">
     <h2> Things to bring </h2>
     <% if @meal.dishes.empty? %>
       <p> The host hasn't added any dishes </p>
     <% end %>
-    <ul>
-      <%= render @meal.dishes %>
-    </ul>
+    <table class="meal-box dish-flair">
+      <thead>
+        Play nice - Contribute and bring something!
+      </thead>
+      <tbody>
+        <tr><%= render @meal.dishes %></tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-3 col-md-offset-1 meal-box">
     <h2> Comments </h2>
     <%= form_for [@meal,Comment.new] do |f| %>
       <%= f.text_field :content, placeholder: 'already hungry!' %>
+      <hr>
       <%= f.submit "Leave Comment" %>
     <% end %>
     <hr>
