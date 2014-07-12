@@ -1,6 +1,20 @@
-<td class="dish-flair">
-  <%= link_to dish.name, meal_dish_path(@meal, dish), class: 'btn btn-sm btn-success' %>
-  <br>
-  <img src=<%= dish.thumb_url %> alt="No Picture / Bad URL">
-</td>
+<tr>
+  <% if !dish.can_be_claimed %>
+    <% if current_user.id == @meal.host.id %>
+      <td class="dish-flair user-claimed">
+    <% else %>
+      <td class="dish-flair claimed">
+    <% end %>
+  <% elsif dish.claimer_id == @meal.host %>
+    <td class="dish-flair unclaimed">
+  <% elsif Invite.find(dish.claimer_id).user_id == current_user.id  %>
+    <td class="dish-flair user-claimed">
+  <% else %>
+    <td class="dish-flair claimed">
+  <% end %>
+    <%= link_to dish.name, meal_dish_path(@meal, dish), class: 'btn btn-sm btn-danger' %>
+    <br>
+    <img src=<%= dish.thumb_url %> alt="No Picture / Bad URL">
+  </td>
+</tr>
 

@@ -25,6 +25,9 @@ body {
   background-color: #97b35e;
 }
 
+[type="text"] {
+  color:black;
+}
 
 [type="submit"]{
 color: black;
@@ -69,6 +72,22 @@ color: black;
 
 .dish-flair {
   border: 2px solid white;
+}
+
+.unclaimed {
+  background-color: #97b35e;
+}
+
+.claimed {
+  background-color: yellow;
+}
+
+.user-claimed {
+  background-color: blue;
+}
+
+.dish-list {
+  padding: 10px;
 }
 
 .navbar-default {
