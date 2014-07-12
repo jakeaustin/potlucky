@@ -1,3 +1,4 @@
+<%= button_to 'Back to meal', meal_path(@meal), method: :get, class: 'btn btn-primary' %>
 <%= form_for [@meal, @dish] do |f| %>
 
   <% if @dish.errors.any? %>

@@ -1,3 +1,4 @@
+<%= button_to 'Back to meal', meal_path(@meal), method: :get, class: 'btn btn-primary' %>
 <h2><%= @dish.name %></h2>
 <img src=<%= @dish.thumb_url %> alt="No Picture / Bad URL">
 <%= link_to "See Recipe", @dish.recipe_url %>
