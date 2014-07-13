@@ -2,20 +2,22 @@
 <hr>
 <% @users.each do |user| %>
   <% if @meal.guest_users.include?(user) %>
-    <%= user.invites.find_by(meal_id: params[:meal_id]).invite_status %>
+    <h3 class="block col-md-6">
+      <%= user.invites.find_by(meal_id: params[:meal_id]).invite_status %>
+    </h3>
   <% else %>
 
-    <div class="block">
+    <div class="block col-md-6">
 
     <%= form_for [@meal, Invite.new] do |f| %>
       <%= f.hidden_field :meal_id, value: @meal.id %>
       <%= f.hidden_field :user_id, value: user.id %>
       <%= f.hidden_field :role, value: 'guest' %>
       <%= f.hidden_field :invite_status, value: 'pending' %>
-      <%= f.submit "Invite" %>
+      <%= f.submit "Invite", class: 'btn btn-lg btn-primary' %>
     <% end %>
     </div>
   <% end %>
-   |  <%= user.email %>
-  <hr>
+   <h3 class="block col-md-6">|   <%= user.email %></h3>
+   <br><br><hr>
 <% end %>
