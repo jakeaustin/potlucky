@@ -11,4 +11,5 @@ class Meal < ActiveRecord::Base
   has_one :host_invite, -> { where role: 'host' }, class_name: Invite
   has_one :host, through: :host_invite, source: :user
 
+  validates :title, :location, :hosted_at, presence: true
 end

@@ -15,12 +15,12 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
-    current_user.invites.new(meal: @meal, role: 'host', invite_status: 'attending')
 
-    if current_user.save
+    if @meal.save
+      current_user.invites.create!(meal: @meal, role: 'host', invite_status: 'attending')
       redirect_to root_path, notice: "Your meal was created"
     else
-      redirect_to :new, notice: "there was an error saving your meal"
+      redirect_to :back, notice: "there was an error saving your meal"
     end
   end
 

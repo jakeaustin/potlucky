@@ -90,6 +90,10 @@ color: black;
   padding: 10px;
 }
 
+.block {
+  display: inline-block;
+}
+
 .navbar-default {
   background-color: #666633;
   border-color: #364024;

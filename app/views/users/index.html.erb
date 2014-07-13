@@ -1,8 +1,10 @@
 <%= button_to 'Back to meal', meal_path(@meal), method: :get, class: 'btn btn-primary' %>
+<hr>
 <% @users.each do |user| %>
   <% if @meal.guest_users.include?(user) %>
-    <%= user.invites.find_by(meal_id: params[:meal_id]).invite_status %>  |  <%= user.email %>
+    <%= user.invites.find_by(meal_id: params[:meal_id]).invite_status %>
   <% else %>
+
     <div class="block">
 
     <%= form_for [@meal, Invite.new] do |f| %>
@@ -12,10 +14,8 @@
       <%= f.hidden_field :invite_status, value: 'pending' %>
       <%= f.submit "Invite" %>
     <% end %>
-
     </div>
-    |  <%= user.email %>
-
   <% end %>
-  <br>
+   |  <%= user.email %>
+  <hr>
 <% end %>
