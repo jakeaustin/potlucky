@@ -12,9 +12,11 @@ class DishesController < ApplicationController
     @dish.meal_id = @meal.id
 
     if @dish.save
-      redirect_to meal_path(@meal), notice: "dish added to meal"
+      flash.keep[:notice] = "Dish added to meal"
+      redirect_to meal_path(@meal)
     else
-      render :new, notice: "there was an error adding the dish"
+      flash.keep[:notice] = "There was an error adding your dish"
+      render :new
     end
   end
 
@@ -33,9 +35,11 @@ class DishesController < ApplicationController
     @dish.claimer_id = params[:claimer_id]
 
     if @dish.save
-      redirect_to meal_path(@meal), notice: 'Responsibility for dish updated'
+      flash.keep[:notice] = "Responsibility for dish updated"
+      redirect_to meal_path(@meal)
     else
-      redirect_to meal_path(@meal), notice: 'Something went wrong during update'
+      flash.keep[:notice] = "There was an error updating dish responsibility"
+      redirect_to meal_path(@meal)
     end
   end
 
@@ -43,7 +47,8 @@ class DishesController < ApplicationController
     @meal = Meal.find(params[:meal_id])
     @dish = Dish.find(params[:id])
     @dish.destroy
-    redirect_to meal_path(@meal), notice: "Dish deleted"
+    flash.keep[:notice] = "Dish deleted"
+    redirect_to meal_path(@meal)
   end
 
   def search

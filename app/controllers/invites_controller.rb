@@ -12,7 +12,8 @@ class InvitesController < ApplicationController
   def update
     @invite = Invite.find(params[:id])
     if @invite.role == 'host'
-      redirect_to meal_path(params[:meal_id]), notice: 'Host cannot change status'
+      flash.keep[:notice] = "Host cannot change status"
+      redirect_to meal_path(params[:meal_id])
     else
       @invite.invite_status = params[:invite_status]
       if @invite.save!

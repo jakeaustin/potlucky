@@ -6,9 +6,7 @@
       <%= user.invites.find_by(meal_id: params[:meal_id]).invite_status %>
     </h3>
   <% else %>
-
     <div class="block col-md-6">
-
     <%= form_for [@meal, Invite.new] do |f| %>
       <%= f.hidden_field :meal_id, value: @meal.id %>
       <%= f.hidden_field :user_id, value: user.id %>
@@ -18,6 +16,6 @@
     <% end %>
     </div>
   <% end %>
-   <h3 class="block col-md-6">|   <%= user.email %></h3>
-   <br><br><hr>
+  <h3 class="block col-md-6">|   <%= user.email %></h3>
+  <br><br><hr>
 <% end %>

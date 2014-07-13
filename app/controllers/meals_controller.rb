@@ -17,10 +17,11 @@ class MealsController < ApplicationController
     @meal = Meal.new(meal_params)
 
     if @meal.save
+      flash.keep[:notice] = "Your meal was created!"
       current_user.invites.create!(meal: @meal, role: 'host', invite_status: 'attending')
-      redirect_to root_path, notice: "Your meal was created"
+      redirect_to root_path
     else
-      render :new, notice: "there was an error saving your meal"
+      render :new
     end
   end
 
@@ -40,7 +41,8 @@ class MealsController < ApplicationController
   def destroy
     @meal = Meal.find(params[:id])
     @meal.destroy
-    redirect_to root_path, notice: "Meal deleted"
+    flash.keep[:notice] = "Meal Deleted"
+    redirect_to root_path
   end
 
   private

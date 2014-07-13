@@ -1,5 +1,5 @@
 <h4>You're : <%= @invite.invite_status.capitalize %></h4>
 <%= button_to 'Attending', meal_invite_path(id: @invite.id, meal_id: @meal, invite_status: 'attending', role: 'guest'), method: :patch, class: 'btn btn-success' %>
 <br>
-<%= button_to 'Decline', meal_invite_path(id: @invite.id, meal_id: @meal, invite_status: 'decline',  role: 'guest'), method: :patch, class: 'bth btn-danger' %>
+<%= button_to 'Decline', meal_invite_path(id: @invite.id, meal_id: @meal, invite_status: 'declining',  role: 'guest'), method: :patch, class: 'bth btn-danger' %>
 <br>

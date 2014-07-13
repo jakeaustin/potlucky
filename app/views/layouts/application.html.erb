@@ -18,13 +18,14 @@
   <%= render 'layouts/header' %>
 
   <div class="container text-center">
-    <div class="row">
-      <% flash.each do |name, msg| %>
-         <% if msg.is_a?(String) %>
-           <%= content_tag :div, msg, :class => "flash_#{name}" %>
-         <% end %>
+    <div class="row notice">
+      <% if flash[:notice] %>
+        <div class = "flash-message">
+          <%= flash[:notice] %>
+        </div>
       <% end %>
     </div>
+
     <div class="row">
       <%= yield %>
     </div>

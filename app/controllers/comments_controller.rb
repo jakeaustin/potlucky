@@ -8,14 +8,16 @@ before_action :authenticate_user!
     @comment.user = current_user
     @comment.commentable = @commentable
     if @comment.save!
-      redirect_to :back, notice: 'Comment posted!'
+      flash.keep[:notice] = "Comment saved!"
+      redirect_to :back
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to :back, notice: "Comment deleted"
+    flash.keep[:notice] = "Comment deleted"
+    redirect_to :back
   end
 
   private
