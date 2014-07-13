@@ -20,7 +20,7 @@ class MealsController < ApplicationController
       current_user.invites.create!(meal: @meal, role: 'host', invite_status: 'attending')
       redirect_to root_path, notice: "Your meal was created"
     else
-      redirect_to :back, notice: "there was an error saving your meal"
+      render :new, notice: "there was an error saving your meal"
     end
   end
 

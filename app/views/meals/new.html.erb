@@ -1,35 +1,49 @@
 <div class="row-fluid">
   <%= form_for (@meal), html: {:class => "form-horizontal"} do |f| %>
 
-  <fieldset>
-
-    <legend> New Meal </legend>
-
-    <div class="control-group">
-      <%= f.label :title, "Title" %>
-      <div class="controls">
-        <%= f.text_field :title %>
+  <div class="col-md-6 col-md-offset-3">
+    <% if @meal.errors.any? %>
+      <div class="bg-warning">
+        This form has <%=pluralize(@meal.errors.count, "error") %>.
       </div>
-    </div>
+      <ul class="text-left">
+        <% @meal.errors.full_messages.each do |msg| %>
+          <li>* <%= msg %> </li>
+        <% end %>
+      </ul>
+    <% end %>
 
-    <div class="control-group">
-      <%= f.label :location, 'Location' %>
-      <div class="controls">
-        <%= f.text_field :location %>
-      </div>
-    </div>
-    <br>
-    <div class="control-group">
-      <%= f.label :hosted_at, "When?" %>
-      <div class="controls">
-        <%= f.datetime_select :hosted_at, :ampm => true, :minute_step => 15 %>
-      </div>
-    </div>
-    <br>
-    <div class="form-actions">
-      <%= f.submit "Create Meal!", class: "btn btn-large btn-primary" %>
-    </div>
+    <fieldset>
+      <legend> New Meal </legend>
 
-  </fieldset>
+      <div class="control-group">
+        <%= f.label :title, "Title" %>
+        <div class="controls">
+          <%= f.text_field :title %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :location, 'Location' %>
+        <div class="controls">
+          <%= f.text_field :location %>
+        </div>
+      </div>
+      <br>
+
+      <div class="control-group">
+        <%= f.label :hosted_at, "When?" %>
+        <div class="controls">
+          <%= f.datetime_select :hosted_at, :ampm => true, :minute_step => 15 %>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-actions">
+        <%= f.submit "Create Meal!", class: "btn btn-large btn-primary" %>
+      </div>
+
+    </fieldset>
+  </div>
   <% end %>
 </div>
