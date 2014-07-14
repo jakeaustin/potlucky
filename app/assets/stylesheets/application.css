@@ -14,6 +14,11 @@
  *= require_self
  */
 
+img {
+  width: 50%;
+  height: auto;
+}
+
 .notice{
   width: 50%;
   margin-left: 25%;

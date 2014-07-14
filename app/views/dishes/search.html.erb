@@ -1,28 +1,38 @@
 <%= button_to 'Back to meal', meal_path(@meal), method: :get, class: 'btn btn-primary' %>
-<%= raw @banner %>
 <br>
+<h2>
+  <%= raw @banner %>
+</h2>
+<hr>
 <% @matches.each do |match| %>
-  <%= match[:name]%>
-  <img src=<%= match[:thumb] %> alt='No thumbnail available'>
-  <div>
-    <ul>Recipe:<br>
-      <% match[:ingr].each do |ingredient| %>
-        <li><%=ingredient%></li>
+  <div class="row">
+    <h3>
+      <%= match[:name]%>
+    </h3>
+    <div class="col-md-4">
+      <ul class="text-left">
+        Ingredients:<br>
+        <% match[:ingr].each do |ingredient| %>
+          <li><%=ingredient%></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-4 search-img">
+      <img src=<%= match[:thumb] %> alt='No thumbnail available'>
+    </div>
+    <div class="col-md-4">
+      Rating: <%= match[:rate] %>
+      <br><br>
+      <%= link_to 'See it on Yummly', match[:link], class: 'btn btn-info' %>
+      <br><br>
+      <%= form_for [@meal,Dish.new] do |f| %>
+        <%= f.hidden_field :name, value: match[:name] %>
+        <%= f.hidden_field :thumb_url, value: match[:thumb] %>
+        <%= f.hidden_field :recipe_url, value: match[:link] %>
+        <%= f.submit "Add to meal", class: 'btn btn-primary' %>
       <% end %>
-    </ul>
+    </div>
   </div>
-  <div>
-    Rating: <%= match[:rate] %>
-    <br>
-    <%= link_to 'See it on Yummly', match[:link] %>
-  </div>
-
-  <%= form_for [@meal,Dish.new] do |f| %>
-    <%= f.hidden_field :name, value: match[:name] %>
-    <%= f.hidden_field :thumb_url, value: match[:thumb] %>
-    <%= f.hidden_field :recipe_url, value: match[:link] %>
-    <%= f.submit "Add to meal" %>
-  <% end %>
   <hr>
 <% end %>
 
