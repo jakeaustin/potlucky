@@ -1,45 +1,54 @@
 <%= button_to 'Back to meal', meal_path(@meal), method: :get, class: 'btn btn-primary' %>
-<h2><%= @dish.name %></h2>
-<img src=<%= @dish.thumb_url %> alt="No Picture / Bad URL">
-<%= link_to "See Recipe", @dish.recipe_url %>
+<h2>
+  <%= @dish.name %>
+</h2>
+<div class="row">
+  <div class="col-md-4">
+    <% if @dish.can_be_claimed %>
+        <% if @current_guest == @host %>
+          <% if @claimer == @host %>
+            No one has taken responsibility for this dish yet. As host, you are ultimately responsible for it...
+            <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
+            <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
+          <% else %>
+            Someone vouched to bring this dish
+            <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
+          <% end %>
 
-<% if @dish.can_be_claimed %>
-    <% if @current_guest == @host %>
-      <% if @claimer == @host %>
-        No one has vouched for this dish, yet.
-        As the host, you are ultimately responsible for it...
-        <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: false), method: :patch, class: 'btn btn-primary' %>
-        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
-      <% else %>
-        Someone vouched to bring this dish
-        <%= button_to 'Delete dish', meal_dish_path, method: :delete, class: 'btn btn-warning', confirm: "Are you sure?" %>
-      <% end %>
+        <% else %>
+          <% if @claimer == @current_guest %>
+            You said you would bring this dish
+            <%= button_to "Actually, I will not bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: true), method: :patch, class: 'btn btn-warning' %>
+          <% elsif @claimer == @host %>
+            <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @current_guest.id, can_be_claimed: true), method: :patch, class: 'btn btn-primary' %>
+          <% else %>
+            Someone vouched to bring this dish
+          <% end %>
+        <% end %>
 
     <% else %>
-      <% if @claimer == @current_guest %>
-        you said you would bring this dish
-        <%= button_to "Actually, I will not bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: true), method: :patch, class: 'btn btn-warning' %>
-      <% elsif @claimer == @host %>
-        <%= button_to "I will bring it", meal_dish_path(id: @dish.id, claimer_id: @current_guest.id, can_be_claimed: true), method: :patch, class: 'btn btn-primary' %>
+      <% if @current_guest == @host %>
+        You are bringing this dish
+        <%= button_to "Anyone can bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: true), method: :patch, class: 'btn btn-danger' %>
       <% else %>
-        This dish has been claimed
+        The Host is providing this dish
       <% end %>
     <% end %>
+  </div>
 
-<% else %>
-  <% if @current_guest == @host %>
-    You, as host, are bringing this dish
-    <%= button_to "Anyone can bring it", meal_dish_path(id: @dish.id, claimer_id: @host.id, can_be_claimed: true), method: :patch, class: 'btn btn-danger' %>
-  <% else %>
-    The Host is providing this dish
-  <% end %>
-<% end %>
+  <div class="col-md-4 full-width">
+    <img src=<%= @dish.thumb_url %> alt="No Picture / Bad URL">
+    <br>
+    <%= link_to "See Recipe", @dish.recipe_url, class: 'btn btn-lg btn-info' %>
+  </div>
 
-<h2> Comments </h2>
-  <%= form_for [@dish, Comment.new] do |f| %>
-    <%= f.text_field :content, placeholder: 'already hungry!' %>
-    <%= f.submit "Leave Comment" %>
-  <% end %>
-
-  <%= render @dish.comments %>
-
+  <div class="col-md-4">
+    <h2> Comments </h2>
+    <%= form_for [@dish, Comment.new] do |f| %>
+      <%= f.text_field :content, placeholder: 'already hungry!' %>
+      <%= f.submit "Leave Comment" %>
+    <% end %>
+    <hr>
+    <%= render @dish.comments %>
+  </div>
+</div>
