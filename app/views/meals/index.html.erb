@@ -35,10 +35,13 @@
       <% end %>
       <% @friends_meals.each do |meal| %>
         <div class="row">
-          <h2 class="col-md-6">
+          <h2 class="col-md-4">
             <%= link_to meal.title, meal_path(meal) %>
           </h2>
-          <h3 class="col-md-6">
+          <h2 class="col-md-4">
+            Host: <%= meal.host.email %>
+          </h2>
+          <h3 class="col-md-4">
             <%= meal.hosted_at.strftime("%B %d, '%y | %I:%M %p") %>  @ <%= meal.location %>
           </h3>
         </div>
@@ -58,10 +61,13 @@
       <% end %>
       <% @invites.each do |meal| %>
         <div class="row">
-          <h2 class="col-md-6">
+          <h2 class="col-md-4">
             <%= link_to meal.title, meal_path(meal) %>
           </h2>
-          <h3 class="col-md-6">
+          <h2 class="col-md-4">
+            Host: <%= meal.host.email %>
+          </h2>
+          <h3 class="col-md-4">
             <%= meal.hosted_at.strftime("%B %d, '%y | %I:%M %p") %>  @ <%= meal.location %>
           </h3>
         </div>
@@ -77,10 +83,13 @@
     <div class='panel-body'>
       <% @declined.each do |meal| %>
         <div class="row">
-          <h2 class="col-md-6">
+          <h2 class="col-md-4">
             <%= link_to meal.title, meal_path(meal) %>
           </h2>
-          <h3 class="col-md-6">
+          <h2 class="col-md-4">
+            Host: <%= meal.host.email %>
+          </h2>
+          <h3 class="col-md-4">
             <%= meal.hosted_at.strftime("%B %d, '%y | %I:%M %p") %>  @ <%= meal.location %>
           </h3>
         </div>
