@@ -37,7 +37,7 @@
     <h2> Things to bring </h2>
     <% if @meal.dishes.empty? %>
       <p> The host hasn't added any dishes </p>
-    <% end %>
+    <% else %>
     <table class="meal-box dish-flair col-md-12 ">
       <thead>
         Play nice - Contribute and bring something!
@@ -50,6 +50,7 @@
         <%= render @meal.dishes %>
       </tbody>
     </table>
+    <% end %>
   </div>
 
   <div class="col-md-3 col-md-offset-1 meal-box">
