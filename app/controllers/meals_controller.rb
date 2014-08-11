@@ -3,9 +3,9 @@ class MealsController < ApplicationController
   def index
     if user_signed_in?
       @my_meals = current_user.hosted_meals.order(hosted_at: :desc)
-      @friends_meals = current_user.guest_meals.order(hosted_at: :desc)
-      @invites = current_user.invited_meals.order(hosted_at: :desc)
-      @declined = current_user.declined_meals.order(hosted_at: :desc)
+      @friends_meals = current_user.guest_meals.includes(:host).order(hosted_at: :desc)
+      @invites = current_user.invited_meals.includes(:host).order(hosted_at: :desc)
+      @declined = current_user.declined_meals.includes(:host).order(hosted_at: :desc)
     end
   end
 
