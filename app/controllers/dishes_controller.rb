@@ -53,9 +53,15 @@ class DishesController < ApplicationController
 
   def search
     @meal = Meal.find(params[:meal_id])
-    @results = Yummly.search(params[:search_term])
+
+    @results = Rails.cache.fetch(['yummlySearch', params[:search_term]], expires_in: 5.minutes) do
+      Yummly.search(params[:search_term])
+    end
+
     @banner = @results.attribution.html
-    @matches = @results.matches.map do |matched|
+
+    @matches = Rails.cache.fetch(['yummlyResult', params[:search_term]], expires_in: 5.minutes) do
+      @results.matches.map do |matched|
       match = Yummly.find(matched['id'])
       subset = {
                 name: match.name,
@@ -64,6 +70,7 @@ class DishesController < ApplicationController
                 rate: match.rating,
                 link: match.attribution.url
                }
+      end
     end
   end
 
